@@ -12,7 +12,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prepare": "husky",
     "test": "jest --verbose",
-    "test:coverage": "jest --verbose --coverage"
+    "test:coverage": "jest --verbose --coverage",
+    "type-check": "tsc --noemit"
+
   },
   "dependencies": {
     "expo": "~54.0.23",
