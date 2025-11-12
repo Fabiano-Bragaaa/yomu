@@ -1,23 +1,16 @@
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import expoConfig from 'eslint-config-expo/flat.js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import tailwind from 'eslint-plugin-tailwindcss';
 import testingLibrary from 'eslint-plugin-testing-library';
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member, import/namespace
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { configs, parser } from 'typescript-eslint';
 
 export default defineConfig([
-  {
-    files: ['eslint.config.js'],
-    rules: {
-      'import/namespace': 'off',
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
-    },
-  },
   globalIgnores([
     'dist/*',
     'node_modules',
@@ -31,12 +24,13 @@ export default defineConfig([
     'docs/',
     'cli/',
     'expo-env.d.ts',
-    'eslint.config.js',
   ]),
 
   expoConfig,
 
   eslintPluginPrettierRecommended,
+
+  ...tailwind.configs['flat/recommended'],
 
   reactCompiler.configs.recommended,
 
@@ -63,6 +57,13 @@ export default defineConfig([
     },
     rules: {
       'max-params': ['error', 3],
+      'tailwindcss/classnames-order': [
+        'warn',
+        {
+          officialSorting: true,
+        },
+      ],
+      'tailwindcss/no-custom-classname': 'off',
       'react/display-name': 'off',
       'react/no-inline-styles': 'off',
       'react/destructuring-assignment': 'off',
@@ -94,14 +95,14 @@ export default defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: tsParser,
+      parser: parser,
       parserOptions: {
         project: './tsconfig.json',
         sourceType: 'module',
       },
     },
     rules: {
-      ...tsPlugin.configs.recommended.rules,
+      ...configs.recommended.rules,
       '@typescript-eslint/comma-dangle': 'off',
       '@typescript-eslint/consistent-type-imports': [
         'warn',
