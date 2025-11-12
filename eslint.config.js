@@ -38,7 +38,11 @@ export default defineConfig([
     settings: {
       'import/resolver': {
         alias: {
-          map: [['@env', './src/types/env.d.ts']],
+          map: [
+            ['@env', './src/types/env.d.ts'],
+            ['@components', './src/components'],
+            ['@utils', './src/utils'],
+          ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },
         typescript: {
