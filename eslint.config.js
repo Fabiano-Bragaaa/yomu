@@ -42,6 +42,7 @@ export default defineConfig([
             ['@env', './src/types/env.d.ts'],
             ['@components', './src/components'],
             ['@utils', './src/utils'],
+            ['@hooks', './src/hooks'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },
