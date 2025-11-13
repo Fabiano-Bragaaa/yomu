@@ -11,7 +11,6 @@ type TextVariants = VariantProps<typeof textStyle>;
 type TextProps = Omit<React.ComponentProps<typeof RNText>, 'children'> &
   TextVariants & {
     children?: React.ReactNode;
-    isTitle?: boolean;
     align?: 'left' | 'center' | 'right';
     weight?: 'normal' | 'bold' | 'semibold' | 'medium';
   };
@@ -28,14 +27,13 @@ const Text = React.forwardRef<React.ComponentRef<typeof RNText>, TextProps>(
       sub,
       italic,
       highlight,
-      isTitle,
       align = 'left',
       weight = 'normal',
       ...props
     },
     ref
   ) {
-    const fontFamily = getFontFamily(isTitle, weight);
+    const fontFamily = getFontFamily(weight);
 
     const computedClassName = textStyle({
       isTruncated,
