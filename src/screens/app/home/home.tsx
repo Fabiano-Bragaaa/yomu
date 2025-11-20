@@ -1,10 +1,19 @@
-import { Page, Text } from '@components';
+import { MangaCard, Page } from '@components';
 import { type AppTabScreenProps } from '@routes';
+import React from 'react';
+import { View } from 'react-native';
 
 export function HomeScreen({}: AppTabScreenProps<'Home'>) {
   return (
-    <Page className="flex-1 items-center justify-center">
-      <Text>Home</Text>
+    <Page>
+      <View className="flex-row flex-wrap gap-4">
+        <MangaCard />
+        <MangaCard />
+        <MangaCard />
+        <MangaCard />
+        <MangaCard />
+        <MangaCard />
+      </View>
     </Page>
   );
 }
