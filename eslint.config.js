@@ -43,6 +43,8 @@ export default defineConfig([
             ['@components', './src/components'],
             ['@utils', './src/utils'],
             ['@hooks', './src/hooks'],
+            ['@routes', './src/routes'],
+            ['@screens', './src/screens'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },

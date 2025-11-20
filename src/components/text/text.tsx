@@ -52,7 +52,7 @@ const Text = React.forwardRef<React.ComponentRef<typeof RNText>, TextProps>(
           fontFamily,
           textAlign: align,
         }}
-        className={twMerge(computedClassName, 'text-typography-900', className)}
+        className={twMerge(computedClassName, 'text-white', className)}
         {...props}
         ref={ref}
       />
