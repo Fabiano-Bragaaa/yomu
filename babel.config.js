@@ -18,6 +18,7 @@ module.exports = function (api) {
             '@screens': './src/screens',
             '@api': './src/api',
             '@domain': './src/domain',
+            '@infra': './src/infra',
           },
           extensions: [
             '.ios.ts',

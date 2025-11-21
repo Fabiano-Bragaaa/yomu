@@ -47,6 +47,7 @@ export default defineConfig([
             ['@screens', './src/screens'],
             ['@api', './src/api'],
             ['@domain', './src/domain'],
+            ['@infra', './src/infra'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },
