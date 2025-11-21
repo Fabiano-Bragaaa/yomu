@@ -2,15 +2,22 @@ import { Image, View } from 'react-native';
 
 import { Text } from '../text/text';
 
-export function MangaCard({ imageUrl }: { imageUrl: string | null }) {
+type MangaCardProps = {
+  imageUrl: string | null;
+  title?: string;
+};
+
+export function MangaCard({ imageUrl, title }: MangaCardProps) {
+  console.log('IMAGE URL => ', imageUrl);
+
   return (
     <View className="w-[30%] gap-2">
       <Image
-        source={{ uri: imageUrl ?? 'https://github.com/fabiano-bragaaa.png' }}
+        source={{ uri: imageUrl ?? undefined }}
         className="aspect-[3/4] w-full rounded-lg"
       />
       <Text size="sm" numberOfLines={2}>
-        Manga Title
+        {title}
       </Text>
     </View>
   );

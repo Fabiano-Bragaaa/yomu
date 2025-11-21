@@ -13,6 +13,7 @@ export interface MangaSimple {
   id: string;
   title: MangaTitle;
   cover: MangaCover | null;
+  imageUrl: string | null;
 }
 
 export interface MangaDexResponse {

@@ -1,34 +1,30 @@
 import { MangaCard, Page } from '@components';
-import { mangaService } from '@domain';
 import { type AppTabScreenProps } from '@routes';
-import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { useGetMangaList } from 'src/domain/manga/use-cases/use-get-manga-list';
 
-export function HomeScreen({}: AppTabScreenProps<'Home'>) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  async function testCover() {
-    try {
-      const manga = await mangaService.getManga();
-      const imageUrl = `https://uploads.mangadex.org/covers/${manga[0].id}/${manga[0].cover?.fileName}`;
+export function HomeScreen(_props: AppTabScreenProps<'Home'>) {
+  const { data, isLoading } = useGetMangaList();
 
-      console.log('IMAGE URL => ', manga[0]);
-
-      setImageUrl(imageUrl);
-    } catch (err) {
-      console.log('Erro axios:', err);
-    }
+  if (isLoading || !data) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
   }
-
-  useEffect(() => {
-    testCover();
-  }, []);
 
   return (
     <Page>
       <View className="flex-row flex-wrap items-center gap-4">
-        <MangaCard imageUrl={imageUrl} />
-        <MangaCard imageUrl={imageUrl} />
-        <MangaCard imageUrl={imageUrl} />
+        {data.map((manga) => (
+          <MangaCard
+            key={manga.id}
+            imageUrl={manga.imageUrl}
+            title={manga.title.en}
+          />
+        ))}
       </View>
     </Page>
   );
