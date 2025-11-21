@@ -1,35 +1,17 @@
-import { api } from '@api';
 import { MangaCard, Page } from '@components';
+import { mangaService } from '@domain';
 import { type AppTabScreenProps } from '@routes';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 export function HomeScreen({}: AppTabScreenProps<'Home'>) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const url = `/manga?limit=2&includes[]=cover_art`;
-
   async function testCover() {
     try {
-      const res = await api.get(url);
-      const json = res.data;
+      const manga = await mangaService.getManga();
+      const imageUrl = `https://uploads.mangadex.org/covers/${manga[0].id}/${manga[0].cover?.fileName}`;
 
-      const manga = json.data[0];
-      const mangaId = manga.id;
-
-      const cover = manga.relationships.find(
-        (r: any) => r.type === 'cover_art'
-      );
-
-      if (!cover) {
-        console.log('Nenhuma capa encontrada.');
-        return;
-      }
-
-      const fileName = cover.attributes.fileName;
-
-      const imageUrl = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
-
-      console.log('IMAGE URL => ', imageUrl);
+      console.log('IMAGE URL => ', manga[0]);
 
       setImageUrl(imageUrl);
     } catch (err) {
