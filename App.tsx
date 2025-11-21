@@ -8,6 +8,7 @@ import {
   useFonts,
 } from '@expo-google-fonts/poppins';
 import { Routes } from '@routes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ActivityIndicator, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -27,9 +28,13 @@ export default function App() {
     );
   }
 
+  const queryClient = new QueryClient();
+
   return (
     <SafeAreaProvider>
-      <Routes />
+      <QueryClientProvider client={queryClient}>
+        <Routes />
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
