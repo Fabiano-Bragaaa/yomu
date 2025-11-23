@@ -1,10 +1,7 @@
-import { queryKeys, useAppQuery } from '@infra';
+import { queryKeys, usePaginatedList } from '@infra';
 
 import { mangaService } from '../manga-service';
 
 export function useGetMangaList() {
-  return useAppQuery({
-    queryKey: queryKeys.manga,
-    queryFn: mangaService.getManga,
-  });
+  return usePaginatedList(queryKeys.manga, mangaService.getManga);
 }
