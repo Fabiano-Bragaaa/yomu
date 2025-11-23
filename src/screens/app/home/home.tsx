@@ -16,7 +16,7 @@ export function HomeScreen(_props: AppTabScreenProps<'Home'>) {
   }
 
   return (
-    <Page>
+    <Page style={{ paddingBottom: 0 }}>
       <FlatList
         data={list}
         keyExtractor={(item) => item.id}

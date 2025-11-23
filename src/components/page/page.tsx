@@ -1,6 +1,12 @@
 import { useAppSafeArea } from '@hooks';
 import { type PropsWithChildren } from 'react';
-import { KeyboardAvoidingView, Platform, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  type StyleProp,
+  View,
+  type ViewStyle,
+} from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { ScrollPage, ViewPage } from './components/page-container';
@@ -8,9 +14,15 @@ import { ScrollPage, ViewPage } from './components/page-container';
 export type PageProps = PropsWithChildren & {
   scroll?: boolean;
   className?: string;
+  style?: StyleProp<ViewStyle>;
 };
 
-export function Page({ children, scroll = false, className }: PageProps) {
+export function Page({
+  children,
+  scroll = false,
+  className,
+  style,
+}: PageProps) {
   const { top, bottom } = useAppSafeArea();
   const Container = scroll ? ScrollPage : ViewPage;
 
@@ -22,7 +34,7 @@ export function Page({ children, scroll = false, className }: PageProps) {
       <Container>
         <View
           className={twMerge('px-4', className)}
-          style={{ paddingTop: top, paddingBottom: bottom }}
+          style={[{ paddingTop: top, paddingBottom: bottom }, style]}
         >
           {children}
         </View>
