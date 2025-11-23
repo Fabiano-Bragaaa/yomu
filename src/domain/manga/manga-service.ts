@@ -4,8 +4,8 @@ import { mangaAdapter } from './manga-adapter';
 import { mangaApi } from './manga-api';
 import { type MangaSimple } from './manga-type';
 
-async function getManga(): Promise<PaginatedResponse<MangaSimple>> {
-  const response = await mangaApi.getManga();
+async function getManga(offset = 0): Promise<PaginatedResponse<MangaSimple>> {
+  const response = await mangaApi.getManga(offset);
   return {
     data: mangaAdapter.toMangaSimpleList(response),
     limit: response.limit,
