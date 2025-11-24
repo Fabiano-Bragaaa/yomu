@@ -1,3 +1,4 @@
+import { useAppSafeArea } from '@hooks';
 import { type PropsWithChildren } from 'react';
 import { ScrollView, View } from 'react-native';
 
@@ -6,11 +7,13 @@ export function ViewPage({ children }: PropsWithChildren) {
 }
 
 export function ScrollPage({ children }: PropsWithChildren) {
+  const { bottom } = useAppSafeArea();
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      showsVerticalScrollIndicator={false}
-      className="flex-1 bg-black/95"
+      style={{ flex: 1 }}
+      className="bg-black/95"
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: bottom + 24 }}
     >
       {children}
     </ScrollView>
