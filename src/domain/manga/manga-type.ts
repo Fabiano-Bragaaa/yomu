@@ -25,6 +25,12 @@ export interface MangaDexResponse {
   total: number;
 }
 
+export interface MangaDexSingleResponse {
+  result: string;
+  response: string;
+  data: MangaDexManga;
+}
+
 export interface MangaDexManga {
   id: string;
   type: 'manga';
