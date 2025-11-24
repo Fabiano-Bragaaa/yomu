@@ -14,6 +14,7 @@ export interface MangaSimple {
   title: MangaTitle;
   cover: MangaCover | null;
   imageUrl: string | null;
+  description: string | null;
 }
 
 export interface MangaDexResponse {

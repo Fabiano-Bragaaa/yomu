@@ -38,6 +38,7 @@ function toMangaSimple(manga: MangaDexManga): MangaSimple {
     title,
     cover,
     imageUrl,
+    description: manga.attributes.description.en,
   };
 }
 
