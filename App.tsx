@@ -9,7 +9,7 @@ import {
 } from '@expo-google-fonts/poppins';
 import { Routes } from '@routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, StatusBar, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
@@ -32,6 +32,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
+      <StatusBar barStyle="light-content" backgroundColor="black" translucent />
       <QueryClientProvider client={queryClient}>
         <Routes />
       </QueryClientProvider>
