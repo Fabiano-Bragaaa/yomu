@@ -1,10 +1,11 @@
 import { MangaCard, Page } from '@components';
+import { type MangaSimple } from '@domain';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import { useGetMangaList } from 'src/domain/manga/use-cases/use-get-manga-list';
 
-export function HomeScreen(_props: AppTabScreenProps<'Home'>) {
+export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } = useGetMangaList();
 
   if (isLoading || !list) {
@@ -12,6 +13,18 @@ export function HomeScreen(_props: AppTabScreenProps<'Home'>) {
       <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
+    );
+  }
+
+  function renderItem({ item }: { item: MangaSimple }) {
+    return (
+      <MangaCard
+        imageUrl={item.imageUrl}
+        title={item.title.en}
+        onPress={() => {
+          navigation.navigate('Manga', { id: item.id });
+        }}
+      />
     );
   }
 
@@ -29,9 +42,7 @@ export function HomeScreen(_props: AppTabScreenProps<'Home'>) {
           padding: 16,
           gap: 16,
         }}
-        renderItem={({ item }) => (
-          <MangaCard imageUrl={item.imageUrl} title={item.title.en} />
-        )}
+        renderItem={renderItem}
         onEndReached={() => {
           if (hasNextPage) fetchNextPage();
         }}

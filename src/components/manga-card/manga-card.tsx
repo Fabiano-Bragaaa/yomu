@@ -1,15 +1,16 @@
-import { Image, View } from 'react-native';
+import { Image, Pressable } from 'react-native';
 
 import { Text } from '../text/text';
 
 type MangaCardProps = {
   imageUrl: string | null;
   title?: string;
+  onPress: () => void;
 };
 
-export function MangaCard({ imageUrl, title }: MangaCardProps) {
+export function MangaCard({ imageUrl, title, onPress }: MangaCardProps) {
   return (
-    <View className="w-[30%] gap-2">
+    <Pressable className="w-[30%] gap-2" onPress={onPress}>
       <Image
         source={{ uri: imageUrl ?? undefined }}
         className="aspect-[3/4] w-full rounded-lg"
@@ -17,6 +18,6 @@ export function MangaCard({ imageUrl, title }: MangaCardProps) {
       <Text size="sm" numberOfLines={2}>
         {title}
       </Text>
-    </View>
+    </Pressable>
   );
 }
