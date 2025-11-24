@@ -8,8 +8,6 @@ type MangaCardProps = {
 };
 
 export function MangaCard({ imageUrl, title }: MangaCardProps) {
-  console.log('IMAGE URL => ', imageUrl);
-
   return (
     <View className="w-[30%] gap-2">
       <Image
