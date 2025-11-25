@@ -20,6 +20,8 @@ export function MangaScreen({ route, navigation }: AppScreenProps<'Manga'>) {
     );
   }
 
+  console.log(chapters.data);
+
   return (
     <Page className="gap-6" scroll>
       <Feather
@@ -39,7 +41,7 @@ export function MangaScreen({ route, navigation }: AppScreenProps<'Manga'>) {
       <Text size={'lg'}>{data.description}</Text>
       {chapters.data.map((chapter) => (
         <Text key={chapter.id}>
-          {chapter.id} - {chapter.title}
+          {chapter.attributes.chapter} - {chapter.attributes.title}
         </Text>
       ))}
     </Page>

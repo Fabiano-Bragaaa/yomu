@@ -47,7 +47,7 @@ function toMangaSimple(manga: MangaDexManga): MangaSimple {
 function toChapterSimple(chapter: MangaDexChapter): MangaChapterSimple {
   return {
     id: chapter.id,
-    title: chapter.attributes.title,
+    attributes: chapter.attributes,
   };
 }
 

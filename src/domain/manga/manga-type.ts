@@ -17,11 +17,7 @@ export interface MangaSimple {
   description: string | null;
 }
 
-export interface MangaChapterSimple {
-  id: string;
-  title: string | null;
-}
-
+export type MangaChapterSimple = Pick<MangaDexChapter, 'attributes' | 'id'>;
 export interface MangaDexResponse {
   result: string;
   response: string;
