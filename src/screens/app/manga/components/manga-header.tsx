@@ -1,20 +1,15 @@
 import { Text } from '@components';
+import { type MangaSimple } from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Image, View } from 'react-native';
-import { useGetMangaById } from 'src/domain/manga/use-cases/use-get-manga-by-id';
 
 type MangaHeaderProps = {
-  id: string;
+  manga: MangaSimple;
 };
 
-export function MangaHeader({ id }: MangaHeaderProps) {
+export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
-  const { data } = useGetMangaById(id);
-
-  if (!data) {
-    return null;
-  }
 
   return (
     <View className="gap-6">
@@ -25,14 +20,14 @@ export function MangaHeader({ id }: MangaHeaderProps) {
         onPress={navigation.goBack}
       />
       <Image
-        source={{ uri: data.imageUrl ?? undefined }}
+        source={{ uri: manga.imageUrl ?? undefined }}
         className="aspect-[3/4] w-full rounded-lg"
         resizeMode="cover"
       />
       <Text weight="semibold" size={'2xl'}>
-        {data.title.en}
+        {manga.title.en}
       </Text>
-      <Text size={'lg'}>{data.description}</Text>
+      <Text size={'lg'}>{manga.description}</Text>
     </View>
   );
 }
