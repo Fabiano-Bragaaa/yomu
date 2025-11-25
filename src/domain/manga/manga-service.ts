@@ -2,7 +2,7 @@ import { type PaginatedResponse } from '@infra';
 
 import { mangaAdapter } from './manga-adapter';
 import { mangaApi } from './manga-api';
-import { type MangaSimple } from './manga-type';
+import { type MangaChapterSimple, type MangaSimple } from './manga-type';
 
 async function getManga(offset = 0): Promise<PaginatedResponse<MangaSimple>> {
   const response = await mangaApi.getManga(offset);
@@ -19,7 +19,20 @@ async function getMangaById(id: string): Promise<MangaSimple> {
   return mangaAdapter.toMangaSimple(response);
 }
 
+async function getChaptersByMangaId(
+  mangaId: string
+): Promise<PaginatedResponse<MangaChapterSimple>> {
+  const response = await mangaApi.getChaptersByMangaId(mangaId);
+  return {
+    data: mangaAdapter.toChapterSimpleList(response.data),
+    limit: response.limit,
+    offset: response.offset,
+    total: response.total,
+  };
+}
+
 export const mangaService = {
   getManga,
   getMangaById,
+  getChaptersByMangaId,
 };

@@ -1,5 +1,7 @@
 import type {
+  MangaChapterSimple,
   MangaCover,
+  MangaDexChapter,
   MangaDexManga,
   MangaDexResponse,
   MangaSimple,
@@ -42,6 +44,19 @@ function toMangaSimple(manga: MangaDexManga): MangaSimple {
   };
 }
 
+function toChapterSimple(chapter: MangaDexChapter): MangaChapterSimple {
+  return {
+    id: chapter.id,
+    title: chapter.attributes.title,
+  };
+}
+
+function toChapterSimpleList(
+  chapters: MangaDexChapter[]
+): MangaChapterSimple[] {
+  return chapters.map((chapter) => toChapterSimple(chapter));
+}
+
 function toMangaSimpleList(response: MangaDexResponse): MangaSimple[] {
   return response.data.map((manga) => toMangaSimple(manga));
 }
@@ -49,4 +64,6 @@ function toMangaSimpleList(response: MangaDexResponse): MangaSimple[] {
 export const mangaAdapter = {
   toMangaSimple,
   toMangaSimpleList,
+  toChapterSimple,
+  toChapterSimpleList,
 };

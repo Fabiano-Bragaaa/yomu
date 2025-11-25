@@ -1,6 +1,7 @@
 import { api } from '@api';
 
 import {
+  type MangaDexChapterResponse,
   type MangaDexManga,
   type MangaDexResponse,
   type MangaDexSingleResponse,
@@ -34,7 +35,25 @@ async function getMangaById(id: string): Promise<MangaDexManga> {
   return data.data;
 }
 
+async function getChaptersByMangaId(
+  mangaId: string,
+  limit = 20,
+  offset = 0
+): Promise<MangaDexChapterResponse> {
+  const { data } = await api.get<MangaDexChapterResponse>(
+    `/manga/${mangaId}/feed`,
+    {
+      params: {
+        limit,
+        offset,
+      },
+    }
+  );
+  return data;
+}
+
 export const mangaApi = {
   getManga,
   getMangaById,
+  getChaptersByMangaId,
 };

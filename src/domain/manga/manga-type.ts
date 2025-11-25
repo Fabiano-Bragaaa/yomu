@@ -17,6 +17,11 @@ export interface MangaSimple {
   description: string | null;
 }
 
+export interface MangaChapterSimple {
+  id: string;
+  title: string | null;
+}
+
 export interface MangaDexResponse {
   result: string;
   response: string;
@@ -34,7 +39,7 @@ export interface MangaDexSingleResponse {
 
 export interface MangaDexManga {
   id: string;
-  type: 'manga';
+  type: string; //'manga';
   attributes: MangaAttributes;
   relationships: MangaRelationship[];
 }
@@ -84,7 +89,7 @@ interface MangaAttributes {
 
 interface MangaTag {
   id: string;
-  type: 'tag';
+  type: string; //'tag';
   attributes: {
     name: Record<string, string>;
     description: Record<string, string>;
@@ -96,7 +101,7 @@ interface MangaTag {
 
 interface MangaRelationship {
   id: string;
-  type: 'author' | 'artist' | 'cover_art' | 'creator';
+  type: string; //'author' | 'artist' | 'cover_art' | 'creator';
   attributes?: CoverArtAttributes;
 }
 
@@ -108,4 +113,41 @@ interface CoverArtAttributes {
   createdAt: string;
   updatedAt: string;
   version: number;
+}
+
+export interface MangaDexChapter {
+  id: string;
+  type: string; //'chapter';
+  attributes: ChapterAttributes;
+  relationships: ChapterRelationship[];
+}
+
+export interface MangaDexChapterResponse {
+  result: string;
+  response: string;
+  data: MangaDexChapter[];
+  limit: number;
+  offset: number;
+  total: number;
+}
+
+export interface ChapterAttributes {
+  volume: string | null;
+  chapter: string | null;
+  title: string | null;
+  translatedLanguage: string;
+  externalUrl: string | null;
+  isUnavailable: boolean;
+  publishAt: string;
+  readableAt: string;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
+  pages: number;
+}
+
+export interface ChapterRelationship {
+  id: string;
+  type: string; //'scanlation_group' | 'manga' | 'user';
+  attributes?: any;
 }
