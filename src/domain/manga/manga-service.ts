@@ -43,9 +43,24 @@ async function getChapterPages(
   return response;
 }
 
+async function getSearchManga(
+  search: string,
+  offset = 0,
+  limit = 20
+): Promise<PaginatedResponse<MangaSimple>> {
+  const response = await mangaApi.getSearchManga(search, offset, limit);
+  return {
+    data: mangaAdapter.toMangaSimpleList(response),
+    limit: response.limit,
+    offset: response.offset,
+    total: response.total,
+  };
+}
+
 export const mangaService = {
   getManga,
   getMangaById,
   getChaptersByMangaId,
   getChapterPages,
+  getSearchManga,
 };
