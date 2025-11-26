@@ -1,7 +1,7 @@
-import { MangaCard, Page } from '@components';
+import { MangaCard, Page, TextInput } from '@components';
 import { type MangaSimple, useGetMangaSearch } from '@domain';
 import { type AppTabScreenProps } from '@routes';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -11,6 +11,7 @@ import {
 import { useAppGridSize } from 'src/hooks/use-app-grid-size';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
+  const [search, setSearch] = useState('');
   const { list, isLoading, fetchNextPage, hasNextPage } =
     useGetMangaSearch('vagabond');
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
@@ -40,6 +41,13 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
     <Page style={{ paddingBottom: 0 }}>
       <FlatList
         data={list}
+        ListHeaderComponent={
+          <TextInput
+            value={search}
+            onChangeText={setSearch}
+            placeholder="Search"
+          />
+        }
         keyExtractor={(item) => item.id}
         numColumns={NUM_COLUMNS}
         columnWrapperStyle={{
