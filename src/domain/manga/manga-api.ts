@@ -1,6 +1,7 @@
 import { api } from '@api';
 
 import {
+  type MangaDexAtHomeResponse,
   type MangaDexChapterResponse,
   type MangaDexManga,
   type MangaDexResponse,
@@ -52,8 +53,18 @@ async function getChaptersByMangaId(
   return data;
 }
 
+async function getChapterPages(
+  chapterId: string
+): Promise<MangaDexAtHomeResponse> {
+  const { data } = await api.get<MangaDexAtHomeResponse>(
+    `/at-home/server/${chapterId}`
+  );
+  return data;
+}
+
 export const mangaApi = {
   getManga,
   getMangaById,
   getChaptersByMangaId,
+  getChapterPages,
 };

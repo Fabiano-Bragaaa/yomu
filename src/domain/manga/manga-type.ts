@@ -142,6 +142,16 @@ export interface ChapterAttributes {
   pages: number;
 }
 
+export interface MangaDexChapterPages {
+  hash: string;
+  data: string[];
+  dataSaver: string[];
+}
+
+export interface MangaDexAtHomeResponse {
+  chapter: MangaDexChapterPages;
+}
+
 export interface ChapterRelationship {
   id: string;
   type: string; //'scanlation_group' | 'manga' | 'user';
