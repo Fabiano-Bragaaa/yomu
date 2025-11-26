@@ -8,7 +8,7 @@ import { useGetMangaById } from 'src/domain/manga/use-cases/use-get-manga-by-id'
 
 import { MangaHeader } from './components/manga-header';
 
-export function MangaScreen({ route }: AppScreenProps<'Manga'>) {
+export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
   const { id } = route.params;
   const { list, isLoading, fetchNextPage, hasNextPage } =
     useGetChaptersByMangaId(id);
@@ -24,7 +24,12 @@ export function MangaScreen({ route }: AppScreenProps<'Manga'>) {
 
   function renderItem({ item }: { item: MangaChapterSimple }) {
     return (
-      <Text key={item.id}>
+      <Text
+        key={item.id}
+        onPress={() => {
+          navigation.navigate('Chapter', { id: item.id });
+        }}
+      >
         {item.attributes.chapter} - {item.attributes.title}
       </Text>
     );
