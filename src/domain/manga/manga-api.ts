@@ -23,26 +23,23 @@ async function getManga(offset = 0, limit = 20): Promise<MangaDexResponse> {
 
   return data;
 }
-
 async function getSearchManga(
   search: string,
   offset = 0,
   limit = 20
 ): Promise<MangaDexResponse> {
-  const { data } = await api.get<MangaDexResponse>(
-    `/manga/search?title=${search}`,
-    {
-      params: {
-        originalLanguage: ['en'],
-        includes: ['cover_art'],
-        limit,
-        offset,
-      },
-      paramsSerializer: {
-        indexes: false,
-      },
-    }
-  );
+  const { data } = await api.get<MangaDexResponse>('/manga', {
+    params: {
+      title: search,
+      limit,
+      offset,
+      'order[updatedAt]': 'desc',
+      includes: ['cover_art'],
+    },
+    paramsSerializer: {
+      indexes: false,
+    },
+  });
 
   return data;
 }
@@ -70,6 +67,8 @@ async function getChaptersByMangaId(
       params: {
         limit,
         offset,
+        translatedLanguage: ['en'],
+        'order[chapter]': 'desc',
       },
     }
   );
