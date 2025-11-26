@@ -149,6 +149,7 @@ export interface MangaDexChapterPages {
 }
 
 export interface MangaDexAtHomeResponse {
+  baseUrl: string;
   chapter: MangaDexChapterPages;
 }
 
