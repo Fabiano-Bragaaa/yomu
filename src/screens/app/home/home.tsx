@@ -4,10 +4,18 @@ import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import {
   ActivityIndicator,
+  Dimensions,
   FlatList,
   type ListRenderItemInfo,
   View,
 } from 'react-native';
+
+const NUM_COLUMNS = 3;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_PADDING = 24;
+const ITEM_MARGIN = 16;
+const ITEM_WIDTH =
+  (SCREEN_WIDTH - SCREEN_PADDING * 2 - ITEM_MARGIN) / NUM_COLUMNS;
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } = useGetMangaList();
@@ -28,6 +36,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
+        width={ITEM_WIDTH}
       />
     );
   }
@@ -37,14 +46,12 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
       <FlatList
         data={list}
         keyExtractor={(item) => item.id}
-        numColumns={3}
+        numColumns={NUM_COLUMNS}
         columnWrapperStyle={{
-          justifyContent: 'space-between',
-          marginBottom: 16,
+          columnGap: ITEM_MARGIN,
         }}
         contentContainerStyle={{
-          padding: 16,
-          gap: 16,
+          rowGap: SCREEN_PADDING,
         }}
         renderItem={renderItem}
         onEndReached={() => {
