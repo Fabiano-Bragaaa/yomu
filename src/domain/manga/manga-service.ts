@@ -4,7 +4,7 @@ import { mangaAdapter } from './manga-adapter';
 import { mangaApi } from './manga-api';
 import {
   type MangaChapterSimple,
-  type MangaDexChapterPages,
+  type MangaDexAtHomeResponse,
   type MangaSimple,
 } from './manga-type';
 
@@ -38,9 +38,9 @@ async function getChaptersByMangaId(
 
 async function getChapterPages(
   chapterId: string
-): Promise<MangaDexChapterPages> {
+): Promise<MangaDexAtHomeResponse> {
   const response = await mangaApi.getChapterPages(chapterId);
-  return response.chapter;
+  return response;
 }
 
 export const mangaService = {
