@@ -11,7 +11,7 @@ import {
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } =
-    useGetMangaSearch('naruto');
+    useGetMangaSearch('vagabond');
 
   if (isLoading || !list) {
     return (
