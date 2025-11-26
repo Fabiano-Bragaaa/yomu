@@ -13,6 +13,7 @@ export function ScrollPage({ children }: PropsWithChildren) {
       keyboardShouldPersistTaps="handled"
       style={{ flex: 1 }}
       className="bg-black/95"
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1, paddingBottom: bottom + 24 }}
     >
       {children}

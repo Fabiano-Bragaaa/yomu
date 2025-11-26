@@ -4,22 +4,16 @@ import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   FlatList,
   type ListRenderItemInfo,
   View,
 } from 'react-native';
-
-const NUM_COLUMNS = 3;
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_PADDING = 24;
-const ITEM_MARGIN = 16;
-const ITEM_WIDTH =
-  (SCREEN_WIDTH - SCREEN_PADDING * 2 - ITEM_MARGIN) / NUM_COLUMNS;
+import { useAppGridSize } from 'src/hooks/use-app-grid-size';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } = useGetMangaList();
-
+  const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
+    useAppGridSize();
   if (isLoading || !list) {
     return (
       <View className="flex-1 items-center justify-center">
@@ -57,6 +51,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
         onEndReached={() => {
           if (hasNextPage) fetchNextPage();
         }}
+        showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.3}
       />
     </Page>
