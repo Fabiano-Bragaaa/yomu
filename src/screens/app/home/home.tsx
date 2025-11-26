@@ -1,5 +1,5 @@
 import { MangaCard, Page } from '@components';
-import { type MangaSimple } from '@domain';
+import { type MangaSimple, useGetMangaList } from '@domain';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import {
@@ -8,7 +8,6 @@ import {
   type ListRenderItemInfo,
   View,
 } from 'react-native';
-import { useGetMangaList } from 'src/domain/manga/use-cases/use-get-manga-list';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } = useGetMangaList();

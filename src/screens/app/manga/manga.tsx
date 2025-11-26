@@ -1,5 +1,9 @@
 import { Page, Text } from '@components';
-import { type MangaChapterSimple } from '@domain';
+import {
+  type MangaChapterSimple,
+  useGetChaptersByMangaId,
+  useGetMangaById,
+} from '@domain';
 import { type AppScreenProps } from '@routes';
 import React from 'react';
 import {
@@ -8,8 +12,6 @@ import {
   type ListRenderItemInfo,
   View,
 } from 'react-native';
-import { useGetChaptersByMangaId } from 'src/domain/manga/use-cases/use-get-chapters-by-manga-id';
-import { useGetMangaById } from 'src/domain/manga/use-cases/use-get-manga-by-id';
 
 import { MangaHeader } from './components/manga-header';
 

@@ -1,7 +1,7 @@
 import { Page, Text } from '@components';
+import { useGetChapterPages } from '@domain';
 import { type AppScreenProps } from '@routes';
 import { FlatList, Image, type ListRenderItemInfo } from 'react-native';
-import { useGetChapterPages } from 'src/domain/manga/use-cases/use-get-chapter-pages';
 
 export function ChapterScreen({ route }: AppScreenProps<'Chapter'>) {
   const { id } = route.params;
