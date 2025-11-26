@@ -9,11 +9,13 @@ import {
   View,
 } from 'react-native';
 import { useAppGridSize } from 'src/hooks/use-app-grid-size';
+import { useDebounce } from 'src/hooks/use-debounce';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search);
   const { list, isLoading, fetchNextPage, hasNextPage } =
-    useGetMangaSearch('vagabond');
+    useGetMangaSearch(debouncedSearch);
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
     useAppGridSize();
   if (isLoading || !list) {
