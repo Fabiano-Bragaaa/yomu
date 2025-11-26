@@ -8,11 +8,13 @@ import {
   type ListRenderItemInfo,
   View,
 } from 'react-native';
+import { useAppGridSize } from 'src/hooks/use-app-grid-size';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } =
     useGetMangaSearch('vagabond');
-
+  const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
+    useAppGridSize();
   if (isLoading || !list) {
     return (
       <View className="flex-1 items-center justify-center">
@@ -29,6 +31,7 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
+        width={ITEM_WIDTH}
       />
     );
   }
@@ -38,14 +41,13 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
       <FlatList
         data={list}
         keyExtractor={(item) => item.id}
-        numColumns={3}
+        numColumns={NUM_COLUMNS}
         columnWrapperStyle={{
-          justifyContent: 'space-between',
-          marginBottom: 16,
+          columnGap: ITEM_MARGIN,
         }}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          padding: 16,
-          gap: 16,
+          rowGap: SCREEN_PADDING,
         }}
         renderItem={renderItem}
         onEndReached={() => {
