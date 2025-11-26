@@ -15,7 +15,9 @@ export const { Navigator, Screen } =
 
 export function AppStack() {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <Navigator
+      screenOptions={{ headerShown: false, fullScreenGestureEnabled: true }}
+    >
       <Screen name="AppTab" component={AppTabNavigation} />
       <Screen name="Manga" component={MangaScreen} />
       <Screen name="Chapter" component={ChapterScreen} />

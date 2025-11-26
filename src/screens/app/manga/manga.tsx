@@ -2,7 +2,12 @@ import { Page, Text } from '@components';
 import { type MangaChapterSimple } from '@domain';
 import { type AppScreenProps } from '@routes';
 import React from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  type ListRenderItemInfo,
+  View,
+} from 'react-native';
 import { useGetChaptersByMangaId } from 'src/domain/manga/use-cases/use-get-chapters-by-manga-id';
 import { useGetMangaById } from 'src/domain/manga/use-cases/use-get-manga-by-id';
 
@@ -22,7 +27,7 @@ export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
     );
   }
 
-  function renderItem({ item }: { item: MangaChapterSimple }) {
+  function renderItem({ item }: ListRenderItemInfo<MangaChapterSimple>) {
     return (
       <Text
         key={item.id}

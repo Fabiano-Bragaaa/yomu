@@ -2,7 +2,12 @@ import { MangaCard, Page } from '@components';
 import { type MangaSimple } from '@domain';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  type ListRenderItemInfo,
+  View,
+} from 'react-native';
 import { useGetMangaList } from 'src/domain/manga/use-cases/use-get-manga-list';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
@@ -16,7 +21,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
     );
   }
 
-  function renderItem({ item }: { item: MangaSimple }) {
+  function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
       <MangaCard
         imageUrl={item.imageUrl}
