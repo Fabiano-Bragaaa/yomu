@@ -1,27 +1,22 @@
-import { Page, Text } from '@components';
+import { InfinityScrollList, Page, Text } from '@components';
 import {
   type MangaChapterSimple,
-  useGetChaptersByMangaId,
+  mangaService,
   useGetMangaById,
 } from '@domain';
+import { queryKeys } from '@infra';
 import { type AppScreenProps } from '@routes';
 import React from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  type ListRenderItemInfo,
-  View,
-} from 'react-native';
+import { ActivityIndicator, type ListRenderItemInfo, View } from 'react-native';
 
 import { MangaHeader } from './components/manga-header';
 
 export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
   const { id } = route.params;
-  const { list, isLoading, fetchNextPage, hasNextPage } =
-    useGetChaptersByMangaId(id);
+
   const { data } = useGetMangaById(id);
 
-  if (isLoading || !list || !data) {
+  if (!data) {
     return (
       <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" color="#0000ff" />
@@ -44,19 +39,17 @@ export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
 
   return (
     <Page>
-      <FlatList
-        ListHeaderComponent={<MangaHeader manga={data} />}
-        data={list}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          padding: 16,
-          gap: 16,
-        }}
+      <InfinityScrollList
+        queryKey={queryKeys.chaptersByMangaId(id)}
+        getList={(offset) => mangaService.getChaptersByMangaId(id, offset)}
         renderItem={renderItem}
-        onEndReached={() => {
-          if (hasNextPage) fetchNextPage();
+        flatListProps={{
+          ListHeaderComponent: <MangaHeader manga={data} />,
+          contentContainerStyle: {
+            padding: 16,
+            gap: 16,
+          },
         }}
-        onEndReachedThreshold={0.3}
       />
     </Page>
   );
