@@ -11,7 +11,7 @@ import {
 async function getManga(offset = 0, limit = 20): Promise<MangaDexResponse> {
   const { data } = await api.get<MangaDexResponse>('/manga', {
     params: {
-      originalLanguage: ['en'],
+      availableTranslatedLanguage: ['en'],
       includes: ['cover_art'],
       limit,
       offset,
