@@ -48,6 +48,8 @@ export default defineConfig([
             ['@api', './src/api'],
             ['@domain', './src/domain'],
             ['@infra', './src/infra'],
+            ['@test', './src/test'],
+            ['test-utils', './src/test/test-utils'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },

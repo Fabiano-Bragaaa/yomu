@@ -19,6 +19,8 @@ module.exports = function (api) {
             '@api': './src/api',
             '@domain': './src/domain',
             '@infra': './src/infra',
+            '@test': './src/test',
+            'test-utils': './src/test/test-utils',
           },
           extensions: [
             '.ios.ts',
