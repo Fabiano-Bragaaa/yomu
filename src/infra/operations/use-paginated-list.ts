@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { type PaginatedResponse } from './types';
 
@@ -8,13 +8,15 @@ interface PaginatedListOptions {
   staleTime?: number;
 }
 
-export function usePaginatedList<T>(
+type ItemWithId = {
+  id: string | number;
+};
+
+export function usePaginatedList<T extends ItemWithId>(
   queryKey: readonly unknown[],
   getList: (offset: number) => Promise<PaginatedResponse<T>>,
   options?: PaginatedListOptions
 ) {
-  const [list, setList] = useState<T[]>([]);
-
   const query = useInfiniteQuery({
     queryKey,
     queryFn: ({ pageParam = 0 }) => getList(pageParam),
@@ -33,11 +35,17 @@ export function usePaginatedList<T>(
     enabled: options?.enabled,
   });
 
-  useEffect(() => {
-    if (query.data) {
-      const newList = query.data.pages.flatMap((page) => page.data);
-      setList(newList);
-    }
+  const list = useMemo(() => {
+    if (!query.data) return [];
+
+    const allItems = query.data.pages.flatMap((page) => page.data);
+
+    const uniqueMap = new Map<string | number, T>();
+    allItems.forEach((item) => {
+      uniqueMap.set(item.id, item);
+    });
+
+    return Array.from(uniqueMap.values());
   }, [query.data]);
 
   return {
