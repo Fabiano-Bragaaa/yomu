@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.6">
+  <testsuite name="src/domain/manga/use-cases/__tests__/use-get-chapter-pages.test.ts" errors="0" failures="0" skipped="0" timestamp="2025-11-27T17:53:30" time="0.485" tests="1">
+    <testcase classname="useGetChapterPages()" name="should return the chapter pages" time="0.057">
+    </testcase>
+  </testsuite>
+</testsuites>
