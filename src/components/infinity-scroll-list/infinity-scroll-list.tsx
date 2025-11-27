@@ -1,7 +1,7 @@
 import { usePaginatedList } from '@infra';
 import { useScrollToTop } from '@react-navigation/native';
 import { useRef } from 'react';
-import { FlatList, type FlatListProps, RefreshControl } from 'react-native';
+import { FlatList, type FlatListProps } from 'react-native';
 
 type ItemTConstraints = {
   id: number | string;
@@ -23,8 +23,10 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
   const flastListRef = useRef<FlatList<ItemT>>(null);
   useScrollToTop(flastListRef);
 
-  const { list, isLoading, fetchNextPage, hasNextPage, refetch } =
-    usePaginatedList(queryKey, getList);
+  const { list, fetchNextPage, hasNextPage } = usePaginatedList(
+    queryKey,
+    getList
+  );
 
   return (
     <FlatList
@@ -36,10 +38,6 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
         if (hasNextPage) fetchNextPage();
       }}
       onEndReachedThreshold={0.3}
-      refreshControl={
-        <RefreshControl refreshing={isLoading} onRefresh={refetch} />
-      }
-      refreshing={isLoading}
       showsVerticalScrollIndicator={false}
       {...flatListProps}
       contentContainerStyle={[

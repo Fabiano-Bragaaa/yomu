@@ -1,20 +1,14 @@
-import { MangaCard, Page, TextInput } from '@components';
-import { type MangaSimple, useGetMangaSearch } from '@domain';
+import { InfinityScrollList, MangaCard, Page, TextInput } from '@components';
+import { mangaService, type MangaSimple } from '@domain';
 import { getMangaTitle, useAppGridSize, useDebounce } from '@hooks';
+import { queryKeys } from '@infra';
 import { type AppTabScreenProps } from '@routes';
 import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  type ListRenderItemInfo,
-} from 'react-native';
+import { ActivityIndicator, type ListRenderItemInfo } from 'react-native';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const [search, setSearch] = useState<string>();
   const { debouncedValue: debouncedSearch, isDebouncing } = useDebounce(search);
-  const { list, fetchNextPage, hasNextPage } = useGetMangaSearch(
-    debouncedSearch ?? ''
-  );
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
     useAppGridSize();
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
@@ -32,34 +26,33 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
 
   return (
     <Page style={{ paddingBottom: 0 }}>
-      <FlatList
-        data={list}
-        ListHeaderComponent={
-          <TextInput
-            value={search}
-            onChangeText={setSearch}
-            placeholder="Search"
-            rightComponent={
-              isDebouncing ? (
-                <ActivityIndicator size="small" color="#9ca3af" />
-              ) : null
-            }
-          />
+      <InfinityScrollList
+        queryKey={queryKeys.mangaSearch(debouncedSearch ?? '')}
+        getList={(offset) =>
+          mangaService.getSearchManga(debouncedSearch ?? '', offset)
         }
-        keyExtractor={(item) => item.id}
-        numColumns={NUM_COLUMNS}
-        columnWrapperStyle={{
-          columnGap: ITEM_MARGIN,
-        }}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          rowGap: SCREEN_PADDING,
-        }}
         renderItem={renderItem}
-        onEndReached={() => {
-          if (hasNextPage) fetchNextPage();
+        flatListProps={{
+          numColumns: NUM_COLUMNS,
+          columnWrapperStyle: {
+            columnGap: ITEM_MARGIN,
+          },
+          contentContainerStyle: {
+            rowGap: SCREEN_PADDING,
+          },
+          ListHeaderComponent: (
+            <TextInput
+              value={search}
+              onChangeText={setSearch}
+              placeholder="Search"
+              rightComponent={
+                isDebouncing ? (
+                  <ActivityIndicator size="small" color="#9ca3af" />
+                ) : null
+              }
+            />
+          ),
         }}
-        onEndReachedThreshold={0.3}
       />
     </Page>
   );
