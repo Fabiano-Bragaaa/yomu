@@ -14,6 +14,8 @@ export function useDebounce<T>(
   const [isDebouncing, setIsDebouncing] = useState(false);
 
   useEffect(() => {
+    if (value === undefined) return;
+
     setIsDebouncing(true);
     const timer = setTimeout(() => {
       setDebouncedValue(value);

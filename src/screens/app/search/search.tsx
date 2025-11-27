@@ -1,5 +1,6 @@
 import { MangaCard, Page, TextInput } from '@components';
 import { type MangaSimple, useGetMangaSearch } from '@domain';
+import { getMangaTitle, useAppGridSize, useDebounce } from '@hooks';
 import { type AppTabScreenProps } from '@routes';
 import React, { useState } from 'react';
 import {
@@ -7,21 +8,20 @@ import {
   FlatList,
   type ListRenderItemInfo,
 } from 'react-native';
-import { useAppGridSize } from 'src/hooks/use-app-grid-size';
-import { useDebounce } from 'src/hooks/use-debounce';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<string>();
   const { debouncedValue: debouncedSearch, isDebouncing } = useDebounce(search);
-  const { list, fetchNextPage, hasNextPage } =
-    useGetMangaSearch(debouncedSearch);
+  const { list, fetchNextPage, hasNextPage } = useGetMangaSearch(
+    debouncedSearch ?? ''
+  );
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
     useAppGridSize();
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
       <MangaCard
         imageUrl={item.imageUrl}
-        title={item.title.en}
+        title={getMangaTitle(item.title)}
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
