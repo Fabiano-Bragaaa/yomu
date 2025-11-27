@@ -3,9 +3,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
   collectCoverageFrom: [
-    'src/hooks/query/**/*.{ts,tsx}',
-    'src/hooks/mutations/**/*.{ts,tsx}',
-    'src/utils/date/**/*.{ts,tsx}',
+    'src/domain/**/use-cases/**/*.{ts,tsx}',
     '!**/__tests__/**',
     '!**/coverage/**',
     '!**/node_modules/**',
