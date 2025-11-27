@@ -1,5 +1,6 @@
 import { MangaCard, Page } from '@components';
 import { type MangaSimple, useGetMangaList } from '@domain';
+import { getMangaTitle, useAppGridSize } from '@hooks';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import {
@@ -8,7 +9,6 @@ import {
   type ListRenderItemInfo,
   View,
 } from 'react-native';
-import { useAppGridSize } from 'src/hooks/use-app-grid-size';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { list, isLoading, fetchNextPage, hasNextPage } = useGetMangaList();
@@ -26,7 +26,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
     return (
       <MangaCard
         imageUrl={item.imageUrl}
-        title={item.title.en}
+        title={getMangaTitle(item.title)}
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
