@@ -9,8 +9,13 @@ export function HomeSkeleton() {
   const height = useWindowDimensions().height * 0.2;
   return (
     <Page
-      className="flex-row flex-wrap"
-      style={{ rowGap: SCREEN_PADDING, columnGap: ITEM_MARGIN }}
+      className="flex-row flex-wrap p-0"
+      style={{
+        rowGap: SCREEN_PADDING,
+        columnGap: ITEM_MARGIN,
+        paddingTop: 0,
+        paddingBottom: 0,
+      }}
     >
       <GridSkeleton
         width={ITEM_WIDTH}

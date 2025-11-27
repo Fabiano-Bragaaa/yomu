@@ -12,12 +12,6 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
     useAppGridSize();
 
-  const loading = true;
-
-  if (loading) {
-    return <HomeSkeleton />;
-  }
-
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
       <MangaCard
@@ -46,6 +40,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
             rowGap: SCREEN_PADDING,
           },
         }}
+        loadingComponent={<HomeSkeleton />}
       />
     </Page>
   );
