@@ -73,7 +73,9 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
       onEndReachedThreshold={0.3}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={ListEmpty}
-      ListFooterComponent={<ActivityIndicator size="small" />}
+      ListFooterComponent={
+        hasNextPage ? <ActivityIndicator size="small" /> : null
+      }
       contentContainerStyle={[
         { flexGrow: 1, justifyContent: 'flex-start' },
         flatListProps?.contentContainerStyle,
