@@ -6,26 +6,17 @@ import {
   ActivityIndicator,
   FlatList,
   type ListRenderItemInfo,
-  View,
 } from 'react-native';
 import { useAppGridSize } from 'src/hooks/use-app-grid-size';
 import { useDebounce } from 'src/hooks/use-debounce';
 
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search);
-  const { list, isLoading, fetchNextPage, hasNextPage } =
+  const { debouncedValue: debouncedSearch, isDebouncing } = useDebounce(search);
+  const { list, fetchNextPage, hasNextPage } =
     useGetMangaSearch(debouncedSearch);
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
     useAppGridSize();
-  if (isLoading || !list) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
-
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
       <MangaCard
@@ -48,6 +39,11 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
             value={search}
             onChangeText={setSearch}
             placeholder="Search"
+            rightComponent={
+              isDebouncing ? (
+                <ActivityIndicator size="small" color="#9ca3af" />
+              ) : null
+            }
           />
         }
         keyExtractor={(item) => item.id}

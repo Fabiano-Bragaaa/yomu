@@ -9,12 +9,15 @@ import { twMerge } from 'tailwind-merge';
 type SearchInputProps = Pick<
   TextInputProps,
   'value' | 'onChangeText' | 'placeholder'
->;
+> & {
+  rightComponent?: React.ReactNode;
+};
 
 export function TextInput({
   value,
   onChangeText,
   placeholder,
+  rightComponent,
 }: SearchInputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -34,6 +37,7 @@ export function TextInput({
         placeholderTextColor="#9ca3af"
         className="flex-1 text-white"
       />
+      {rightComponent}
     </View>
   );
 }
