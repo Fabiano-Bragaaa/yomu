@@ -1,4 +1,10 @@
-import { InfinityScrollList, MangaCard, Page, TextInput } from '@components';
+import {
+  FeedSkeleton,
+  InfinityScrollList,
+  MangaCard,
+  Page,
+  TextInput,
+} from '@components';
 import { mangaService, type MangaSimple } from '@domain';
 import { getMangaTitle, useAppGridSize, useDebounce } from '@hooks';
 import { queryKeys } from '@infra';
@@ -31,6 +37,8 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
         getList={(offset) =>
           mangaService.getSearchManga(debouncedSearch ?? '', offset)
         }
+        loadingComponent={<FeedSkeleton />}
+        emptyComponent={<FeedSkeleton />}
         renderItem={renderItem}
         flatListProps={{
           numColumns: NUM_COLUMNS,

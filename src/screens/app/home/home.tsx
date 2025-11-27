@@ -1,12 +1,10 @@
-import { InfinityScrollList, MangaCard, Page } from '@components';
+import { FeedSkeleton, InfinityScrollList, MangaCard, Page } from '@components';
 import { mangaService, type MangaSimple } from '@domain';
 import { getMangaTitle, useAppGridSize } from '@hooks';
 import { queryKeys } from '@infra';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import { type ListRenderItemInfo } from 'react-native';
-
-import { HomeSkeleton } from './components/home-skeleton';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
   const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
@@ -40,7 +38,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
             rowGap: SCREEN_PADDING,
           },
         }}
-        loadingComponent={<HomeSkeleton />}
+        loadingComponent={<FeedSkeleton />}
       />
     </Page>
   );

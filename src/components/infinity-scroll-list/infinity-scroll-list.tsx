@@ -1,7 +1,7 @@
 import { usePaginatedList } from '@infra';
 import { useScrollToTop } from '@react-navigation/native';
 import { useRef } from 'react';
-import { FlatList, type FlatListProps } from 'react-native';
+import { ActivityIndicator, FlatList, type FlatListProps } from 'react-native';
 
 type ItemTConstraints = {
   id: number | string;
@@ -13,6 +13,7 @@ type Props<ItemT extends ItemTConstraints> = {
   renderItem: FlatListProps<ItemT>['renderItem'];
   flatListProps?: Omit<Partial<FlatListProps<ItemT>>, 'renderItem'>;
   loadingComponent?: React.ReactNode;
+  emptyComponent?: React.ReactNode;
 };
 
 export function InfinityScrollList<ItemT extends ItemTConstraints>({
@@ -21,6 +22,7 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
   renderItem,
   flatListProps,
   loadingComponent,
+  emptyComponent,
 }: Props<ItemT>) {
   const flastListRef = useRef<FlatList<ItemT>>(null);
   useScrollToTop(flastListRef);
@@ -30,8 +32,11 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
     getList
   );
 
-  if (isLoading) {
-    return loadingComponent;
+  function ListEmpty() {
+    if (isLoading) {
+      return <>{loadingComponent ?? null}</>;
+    }
+    return <>{emptyComponent ?? null}</>;
   }
 
   return (
@@ -45,11 +50,13 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
       }}
       onEndReachedThreshold={0.3}
       showsVerticalScrollIndicator={false}
-      {...flatListProps}
+      ListEmptyComponent={ListEmpty}
+      ListFooterComponent={<ActivityIndicator size="small" />}
       contentContainerStyle={[
-        { flex: list.length === 0 ? 1 : undefined },
+        { flexGrow: 1, justifyContent: 'flex-start' },
         flatListProps?.contentContainerStyle,
       ]}
+      {...flatListProps}
     />
   );
 }
