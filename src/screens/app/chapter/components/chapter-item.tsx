@@ -1,13 +1,13 @@
-import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Dimensions, View, TouchableOpacity, Image } from "react-native";
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
 
 type ChapterItemProps = {
-uri: string
-}
+  uri: string;
+};
 
-export function ChapterItem({uri}: ChapterItemProps) {
-  const navigation = useNavigation()
+export function ChapterItem({ uri }: ChapterItemProps) {
+  const navigation = useNavigation();
   const { width, height } = Dimensions.get('window');
   return (
     <View style={{ width, height }}>
@@ -27,4 +27,3 @@ export function ChapterItem({uri}: ChapterItemProps) {
     </View>
   );
 }
-

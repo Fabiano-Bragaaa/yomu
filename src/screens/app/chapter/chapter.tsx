@@ -2,25 +2,18 @@ import { Page } from '@components';
 import { useGetChapterPages } from '@domain';
 import { type AppScreenProps } from '@routes';
 import React from 'react';
-import {
-  FlatList,
-  type ListRenderItemInfo,
-} from 'react-native';
+import { FlatList, type ListRenderItemInfo } from 'react-native';
+
 import { ChapterItem } from './components/chapter-item';
 
-export function ChapterScreen({
-  route,
-}: AppScreenProps<'Chapter'>) {
+export function ChapterScreen({ route }: AppScreenProps<'Chapter'>) {
   const { id } = route.params;
   const { data } = useGetChapterPages(id);
 
   const uri = `${data?.baseUrl}/data/${data?.chapter.hash}`;
 
   function renderItem({ item }: ListRenderItemInfo<string>) {
-    return (
-      <ChapterItem uri={`${uri}/${item}`} />
-     
-    );
+    return <ChapterItem uri={`${uri}/${item}`} />;
   }
 
   return (
