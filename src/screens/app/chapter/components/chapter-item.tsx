@@ -18,16 +18,13 @@ export function ChapterItem({ uri }: ChapterItemProps) {
   const { width, height } = Dimensions.get('window');
   const [loading, setLoading] = useState(true);
   return (
-    <View
-      style={{ width, height }}
-      >
+    <View style={{ width, height }}>
       <TouchableOpacity
         className="absolute z-10 self-start p-4"
         onPress={navigation.goBack}
       >
         <Feather name="arrow-left" size={24} color="white" />
       </TouchableOpacity>
-     
 
       <Image
         source={{
@@ -39,11 +36,11 @@ export function ChapterItem({ uri }: ChapterItemProps) {
         onLoadEnd={() => setLoading(false)}
         onError={() => setLoading(false)}
       />
-       {loading && (
-          <View className='absolute w-full h-full z-10 justify-center items-center'>
-            <ActivityIndicator size="large" color="#fff" />
-          </View>
-        )}
+      {loading && (
+        <View className="absolute z-10 size-full items-center justify-center">
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
     </View>
   );
 }

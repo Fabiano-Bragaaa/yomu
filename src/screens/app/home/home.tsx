@@ -7,8 +7,7 @@ import React from 'react';
 import { type ListRenderItemInfo } from 'react-native';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
-  const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
-    useAppGridSize();
+  const { NUM_COLUMNS, ITEM_MARGIN, SCREEN_PADDING } = useAppGridSize();
 
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
@@ -18,7 +17,6 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'Home'>) {
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
-        width={ITEM_WIDTH}
       />
     );
   }

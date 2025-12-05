@@ -15,8 +15,7 @@ import { ActivityIndicator, type ListRenderItemInfo } from 'react-native';
 export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
   const [search, setSearch] = useState<string>();
   const { debouncedValue: debouncedSearch, isDebouncing } = useDebounce(search);
-  const { NUM_COLUMNS, ITEM_WIDTH, ITEM_MARGIN, SCREEN_PADDING } =
-    useAppGridSize();
+  const { NUM_COLUMNS, ITEM_MARGIN, SCREEN_PADDING } = useAppGridSize();
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
     return (
       <MangaCard
@@ -25,7 +24,6 @@ export function SearchScreen({ navigation }: AppTabScreenProps<'Search'>) {
         onPress={() => {
           navigation.navigate('Manga', { id: item.id });
         }}
-        width={ITEM_WIDTH}
       />
     );
   }
