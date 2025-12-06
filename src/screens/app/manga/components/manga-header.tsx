@@ -1,5 +1,5 @@
 import { Text } from '@components';
-import { type MangaSimple } from '@domain';
+import { useFavoriteManga, type MangaSimple } from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
@@ -11,10 +11,8 @@ type MangaHeaderProps = {
 
 export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
+  const { toggleFavorite, isFavorite } = useFavoriteManga();
 
-  function toggleFavorite() {
-    //TODO: toggle favorite     
-  }
 
   return (
     <View className="gap-6">
@@ -30,7 +28,7 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
         resizeMode="cover"
       >
         <TouchableOpacity onPress={toggleFavorite} className='p-4 bg-white rounded-full items-center justify-center self-end m-4'>
-          <Feather name='heart' size={24} color='black' />
+          <Feather name='heart' size={24} color={isFavorite ? '#ff0000' : '#000'} />
         </TouchableOpacity>
       </ImageBackground>
       <Text weight="semibold" size={'2xl'}>
