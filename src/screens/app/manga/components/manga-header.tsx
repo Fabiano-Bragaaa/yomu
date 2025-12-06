@@ -1,9 +1,9 @@
 import { Text } from '@components';
-import { useFavoriteManga, type MangaSimple } from '@domain';
+import { type MangaSimple, useFavoriteManga } from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, ImageBackground,  TouchableOpacity, View } from 'react-native';
+import { ImageBackground, TouchableOpacity, View } from 'react-native';
 
 type MangaHeaderProps = {
   manga: MangaSimple;
@@ -12,7 +12,6 @@ type MangaHeaderProps = {
 export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
   const { toggleFavorite, isFavorite } = useFavoriteManga();
-
 
   return (
     <View className="gap-6">
@@ -27,8 +26,15 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
         className="aspect-[3/4] w-full rounded-lg"
         resizeMode="cover"
       >
-        <TouchableOpacity onPress={toggleFavorite} className='p-4 bg-white rounded-full items-center justify-center self-end m-4'>
-          <Feather name='heart' size={24} color={isFavorite ? '#ff0000' : '#000'} />
+        <TouchableOpacity
+          onPress={toggleFavorite}
+          className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
+        >
+          <Feather
+            name="heart"
+            size={24}
+            color={isFavorite ? '#ff0000' : '#000'}
+          />
         </TouchableOpacity>
       </ImageBackground>
       <Text weight="semibold" size={'2xl'}>
