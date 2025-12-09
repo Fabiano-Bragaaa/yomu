@@ -54,6 +54,7 @@ export function registerInterceptor({
         saveCredentials({
           access_token: newAuthCredentials.access_token,
           refresh_token: authCredentials?.refresh_token,
+          expires_in: newAuthCredentials.expires_in,
         });
 
         failedRequest.headers.Authorization = `Bearer ${newAuthCredentials.access_token}`;
