@@ -21,22 +21,24 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
         color="white"
         onPress={navigation.goBack}
       />
-      <ImageBackground
-        source={{ uri: manga.imageUrl ?? undefined }}
-        className="aspect-[3/4] w-full rounded-lg"
-        resizeMode="cover"
+      <View className='aspect-[3/4] w-full rounded-lg overflow-hidden'>
+   { manga.imageUrl && <ImageBackground
+      source={{ uri: manga.imageUrl }}
+      className="flex-1"
+      resizeMode="cover"
+    >
+      <TouchableOpacity
+        onPress={toggleFavorite}
+        className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
       >
-        <TouchableOpacity
-          onPress={toggleFavorite}
-          className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
-        >
-          <Feather
-            name="heart"
-            size={24}
-            color={isFavorite ? '#ff0000' : '#000'}
-          />
-        </TouchableOpacity>
-      </ImageBackground>
+        <Feather
+          name="heart"
+          size={24}
+          color={isFavorite ? '#ff0000' : '#000'}
+        />
+      </TouchableOpacity>
+    </ImageBackground>}
+      </View>
       <Text weight="semibold" size={'2xl'}>
         {manga.title.en}
       </Text>
