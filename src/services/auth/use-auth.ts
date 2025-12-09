@@ -33,9 +33,13 @@ export function useAuth(): AuthCredentialsType['userCredentials'] {
   return user;
 }
 
-export function useAuthService():Omit<AuthCredentialsType, 'userCredentials'> {
-  const saveCredentials = useAuthCredentialsZustand((state) => state.saveCredentials);
-  const removeCredentials = useAuthCredentialsZustand((state) => state.removeCredentials);
+export function useAuthService(): Omit<AuthCredentialsType, 'userCredentials'> {
+  const saveCredentials = useAuthCredentialsZustand(
+    (state) => state.saveCredentials
+  );
+  const removeCredentials = useAuthCredentialsZustand(
+    (state) => state.removeCredentials
+  );
   const isLoading = useAuthCredentialsZustand((state) => state.isLoading);
 
   return {

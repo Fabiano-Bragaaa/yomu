@@ -20,6 +20,7 @@ module.exports = function (api) {
             '@domain': './src/domain',
             '@infra': './src/infra',
             '@test': './src/test',
+            '@services': './src/services',
             'test-utils': './src/test/test-utils',
           },
           extensions: [
