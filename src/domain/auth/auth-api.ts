@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 
-import { type User } from './auth-type';
+import { type RefreshTokenResponse, type User } from './auth-type';
 
 function getAuthUrl(): { url: string } {
   const url = process.env.EXPO_PUBLIC_AUTH_URL;
@@ -39,8 +39,27 @@ function getParams(): ParamsResponse {
   };
 }
 
+interface RefreshParamsResponse {
+  client_id: string;
+  client_secret: string;
+  grant_type: string;
+}
+
+function getRefreshParams(): RefreshParamsResponse {
+  const client_id = process.env.EXPO_PUBLIC_CLIENT_ID;
+  const client_secret = process.env.EXPO_PUBLIC_CLIENT_SECRET;
+  const grant_type = process.env.EXPO_PUBLIC_GRANT_TYPE_REFRESH;
+
+  if (!client_id || !client_secret) {
+    throw new Error('Missing environment variables for refresh');
+  }
+
+  return { client_id, client_secret, grant_type };
+}
+
 const { url } = getAuthUrl();
 const envParams = getParams();
+const envRefreshParams = getRefreshParams();
 
 async function login(): Promise<User> {
   const params = new URLSearchParams();
@@ -63,6 +82,34 @@ async function login(): Promise<User> {
   return response.data;
 }
 
+async function refreshToken(
+  refresh_token: string
+): Promise<RefreshTokenResponse> {
+  const params = new URLSearchParams();
+
+  params.set('client_id', envRefreshParams.client_id);
+  params.set('client_secret', envRefreshParams.client_secret);
+  params.set('grant_type', envRefreshParams.grant_type);
+  params.set('refresh_token', refresh_token);
+
+  const response = await axios.post(url, params, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  });
+
+  console.log('refresh feito com sucesso');
+  console.log('refresh data', response.data);
+
+  return response.data;
+}
+
+function isRefreshTokenRequest(request: AxiosRequestConfig): boolean {
+  return request.url === url;
+}
+
 export const authApi = {
   login,
+  refreshToken,
+  isRefreshTokenRequest,
 };
