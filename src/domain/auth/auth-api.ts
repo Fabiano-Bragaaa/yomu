@@ -76,9 +76,6 @@ async function login(): Promise<User> {
     },
   });
 
-  console.log('login feito com sucesso');
-  console.log('data', response.data);
-
   return response.data;
 }
 
@@ -97,10 +94,6 @@ async function refreshToken(
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-
-  console.log('refresh feito com sucesso');
-  console.log('refresh data', response.data);
-
   return response.data;
 }
 

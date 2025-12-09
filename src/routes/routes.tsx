@@ -6,10 +6,6 @@ import { AppStack } from './app-stack';
 
 export function Routes() {
   useAuthStartup();
-  const user = useAuth();
-
-  console.log('user', user);
-
   return (
     <NavigationContainer>
       <AppStack />

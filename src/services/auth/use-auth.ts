@@ -31,8 +31,6 @@ const useAuthCredentialsZustand = create<AuthCredentialsType>()(
             },
           });
         } catch {
-          console.log('erro ao fazer o refresh');
-
           set({ userCredentials: null });
         }
       },
