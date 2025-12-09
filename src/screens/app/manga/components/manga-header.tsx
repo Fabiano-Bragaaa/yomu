@@ -1,16 +1,17 @@
-import { Text } from '@components';
+import { MangaDetailsImageSkeleton, Text } from '@components';
 import { type MangaSimple, useFavoriteManga } from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 
 type MangaHeaderProps = {
-  manga: MangaSimple;
+  manga?: MangaSimple;
 };
 
 export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(true);
   const { toggleFavorite, isFavorite } = useFavoriteManga();
 
   return (
@@ -21,28 +22,33 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
         color="white"
         onPress={navigation.goBack}
       />
-      <View className='aspect-[3/4] w-full rounded-lg overflow-hidden'>
-   { manga.imageUrl && <ImageBackground
-      source={{ uri: manga.imageUrl }}
-      className="flex-1"
-      resizeMode="cover"
-    >
-      <TouchableOpacity
-        onPress={toggleFavorite}
-        className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
-      >
-        <Feather
-          name="heart"
-          size={24}
-          color={isFavorite ? '#ff0000' : '#000'}
-        />
-      </TouchableOpacity>
-    </ImageBackground>}
+      <View className="aspect-[3/4] w-full overflow-hidden rounded-lg">
+        {manga?.imageUrl && (
+          <ImageBackground
+            source={{ uri: manga.imageUrl }}
+            className="flex-1"
+            resizeMode="cover"
+            onLoad={() => setLoading(false)}
+            onError={() => setLoading(false)}
+          >
+            <TouchableOpacity
+              onPress={toggleFavorite}
+              className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
+            >
+              <Feather
+                name="heart"
+                size={24}
+                color={isFavorite ? '#ff0000' : '#000'}
+              />
+            </TouchableOpacity>
+          </ImageBackground>
+        )}
+        {loading && <MangaDetailsImageSkeleton />}
       </View>
       <Text weight="semibold" size={'2xl'}>
-        {manga.title.en}
+        {manga?.title.en}
       </Text>
-      <Text size={'lg'}>{manga.description}</Text>
+      <Text size={'lg'}>{manga?.description}</Text>
     </View>
   );
 }

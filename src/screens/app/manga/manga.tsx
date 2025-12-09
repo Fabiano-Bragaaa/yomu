@@ -7,7 +7,7 @@ import {
 import { queryKeys } from '@infra';
 import { type AppScreenProps } from '@routes';
 import React from 'react';
-import { ActivityIndicator, type ListRenderItemInfo, View } from 'react-native';
+import { type ListRenderItemInfo } from 'react-native';
 
 import { MangaHeader } from './components/manga-header';
 
@@ -15,14 +15,6 @@ export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
   const { id } = route.params;
 
   const { data } = useGetMangaById(id);
-
-  if (!data) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
 
   function renderItem({ item }: ListRenderItemInfo<MangaChapterSimple>) {
     return (
