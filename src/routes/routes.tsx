@@ -9,7 +9,6 @@ export function Routes() {
   const user = useAuth();
 
   console.log('user', user);
-  
 
   return (
     <NavigationContainer>
