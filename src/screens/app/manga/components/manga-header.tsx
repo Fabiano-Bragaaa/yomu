@@ -18,12 +18,14 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const user = useAuth();
-  const { isFavorite } = useCheckFavoriteManga({
-    mangaId: manga?.id,
-    token: user?.access_token,
-  });
+  const { isFavorite: favorite, loading: favoriteLoading } =
+    useCheckFavoriteManga({
+      mangaId: manga?.id,
+      token: user?.access_token,
+    });
 
-  const { toggleFavorite } = useToggleFavoriteManga();
+
+  const { toggleFavorite, isFavorite } = useToggleFavoriteManga(favorite!);
 
   function followManga() {
     if (user && manga?.id) {
@@ -61,7 +63,7 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
             </TouchableOpacity>
           </ImageBackground>
         )}
-        {loading && <MangaDetailsImageSkeleton />}
+        {(loading || favoriteLoading) && <MangaDetailsImageSkeleton />}
       </View>
       <Text weight="semibold" size={'2xl'}>
         {manga?.title.en}

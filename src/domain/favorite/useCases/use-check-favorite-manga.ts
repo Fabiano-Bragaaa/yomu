@@ -10,11 +10,7 @@ export function useCheckFavoriteManga({
   mangaId?: string;
   token?: string;
 }) {
-  const { data, isPending } = useQuery<
-    boolean,
-    Error,
-    { mangaId: string; token: string }
-  >({
+  const { data, isPending } = useQuery<boolean>({
     queryKey: queryKeys.checkFavoriteManga(mangaId!),
     queryFn: () => favoriteService.checkMangaFavoriteStatus(mangaId!, token!),
     enabled: !!mangaId && !!token,
