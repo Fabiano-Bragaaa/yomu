@@ -16,8 +16,6 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
   const user = useAuth();
   const { toggleFavorite, isFavorite } = useToggleFavoriteManga();
 
-  
-
   function followManga() {
     if (user && manga?.id) {
       console.log(manga.id);

@@ -13,7 +13,6 @@ import { MangaHeader } from './components/manga-header';
 
 export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
   const { id } = route.params;
-  console.log(id);
 
   const { data } = useGetMangaById(id);
 
