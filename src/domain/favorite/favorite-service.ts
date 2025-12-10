@@ -5,10 +5,10 @@ import { favoriteApi } from './favorite-api';
 import { type FavoriteMangaSimple } from './favorite-type';
 
 async function getFavorites(
-  offset = 0
+  offset = 0,
+  token: string
 ): Promise<PaginatedResponse<FavoriteMangaSimple>> {
-  const response = await favoriteApi.getFavorites(offset);
-  console.log('response ===>', response);
+  const response = await favoriteApi.getFavorites({ offset, token });
 
   return {
     data: mangaAdapter.toMangaSimpleList(response),

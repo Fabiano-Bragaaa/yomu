@@ -12,8 +12,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ActivityIndicator, StatusBar, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-if(__DEV__){
-  require('./reactotron-config')
+if (__DEV__) {
+  require('./reactotron-config');
 }
 
 export default function App() {
