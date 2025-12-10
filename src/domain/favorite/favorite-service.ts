@@ -22,7 +22,12 @@ async function followManga(mangaId: string, token: string): Promise<void> {
   await favoriteApi.followManga(mangaId, token);
 }
 
+async function unfollowManga(mangaId: string, token: string): Promise<void> {
+  await favoriteApi.unfollowManga(mangaId, token);
+}
+
 export const favoriteService = {
   getFavorites,
   followManga,
+  unfollowManga,
 };

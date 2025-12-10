@@ -35,7 +35,16 @@ async function followManga(mangaId: string, token: string): Promise<void> {
   });
 }
 
+async function unfollowManga(mangaId: string, token: string): Promise<void> {
+  await api.delete<void>(`/manga/${mangaId}/follow`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export const favoriteApi = {
   getFavorites,
   followManga,
+  unfollowManga,
 };
