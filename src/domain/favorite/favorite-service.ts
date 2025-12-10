@@ -18,6 +18,11 @@ async function getFavorites(
   };
 }
 
+async function followManga(mangaId: string, token: string): Promise<void> {
+  await favoriteApi.followManga(mangaId, token);
+}
+
 export const favoriteService = {
   getFavorites,
+  followManga,
 };
