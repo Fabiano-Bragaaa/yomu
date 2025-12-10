@@ -1,12 +1,14 @@
 import { FeedSkeleton, InfinityScrollList, MangaCard, Page } from '@components';
-import { favoriteService, mangaService, type MangaSimple } from '@domain';
+import { favoriteService, type MangaSimple } from '@domain';
 import { getMangaTitle, useAppGridSize } from '@hooks';
 import { queryKeys } from '@infra';
 import { type AppTabScreenProps } from '@routes';
 import React from 'react';
 import { type ListRenderItemInfo } from 'react-native';
 
-export function FavoritesScreen({ navigation }: AppTabScreenProps<'Favorites'>) {
+export function FavoritesScreen({
+  navigation,
+}: AppTabScreenProps<'Favorites'>) {
   const { NUM_COLUMNS, ITEM_MARGIN, SCREEN_PADDING } = useAppGridSize();
 
   function renderItem({ item }: ListRenderItemInfo<MangaSimple>) {
