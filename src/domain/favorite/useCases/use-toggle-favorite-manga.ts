@@ -9,7 +9,7 @@ export function useToggleFavoriteManga(favorite: boolean) {
 
   useEffect(() => {
     setIsFavorite(favorite);
-  }, [favorite])
+  }, [favorite]);
 
   function toggleFavorite(mangaId: string, token: string) {
     setIsFavorite(!isFavorite);
