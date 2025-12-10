@@ -8,19 +8,20 @@ import { ImageBackground, TouchableOpacity, View } from 'react-native';
 
 type MangaHeaderProps = {
   manga?: MangaSimple;
-  mangaId: string;
 };
 
-export function MangaHeader({ manga, mangaId }: MangaHeaderProps) {
+export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const user = useAuth();
   const { toggleFavorite, isFavorite } = useToggleFavoriteManga();
 
+  
+
   function followManga() {
-    if (user) {
-      console.log(user);
-      toggleFavorite(mangaId, user.access_token);
+    if (user && manga?.id) {
+      console.log(manga.id);
+      toggleFavorite(manga.id, user.access_token);
     }
   }
 

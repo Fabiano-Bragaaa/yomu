@@ -37,7 +37,7 @@ export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
         getList={(offset) => mangaService.getChaptersByMangaId(id, offset)}
         renderItem={renderItem}
         flatListProps={{
-          ListHeaderComponent: <MangaHeader manga={data} mangaId={id} />,
+          ListHeaderComponent: <MangaHeader manga={data} />,
           contentContainerStyle: {
             padding: 16,
             gap: 16,
