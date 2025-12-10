@@ -24,7 +24,6 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
       token: user?.access_token,
     });
 
-
   const { toggleFavorite, isFavorite } = useToggleFavoriteManga(favorite!);
 
   function followManga() {
