@@ -28,11 +28,15 @@ async function getFavorites({
 }
 
 async function followManga(mangaId: string, token: string): Promise<void> {
-  await api.post<void>(`/manga/${mangaId}/follow`, {}, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  await api.post<void>(
+    `/manga/${mangaId}/follow`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 }
 
 async function unfollowManga(mangaId: string, token: string): Promise<void> {
