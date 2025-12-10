@@ -28,7 +28,7 @@ async function getFavorites({
 }
 
 async function followManga(mangaId: string, token: string): Promise<void> {
-  await api.post<void>(`/manga/${mangaId}/follow`, {
+  await api.post<void>(`/manga/${mangaId}/follow`, {}, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
