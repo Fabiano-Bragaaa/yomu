@@ -1,11 +1,15 @@
 import { queryKeys } from '@infra';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { favoriteService } from '../favorite-service';
 
-export function useToggleFavoriteManga() {
-  const [isFavorite, setIsFavorite] = useState(false);
+export function useToggleFavoriteManga(favorite: boolean) {
+  const [isFavorite, setIsFavorite] = useState(favorite);
+
+  useEffect(() => {
+    setIsFavorite(favorite);
+  }, [favorite])
 
   function toggleFavorite(mangaId: string, token: string) {
     setIsFavorite(!isFavorite);
