@@ -13,6 +13,7 @@ async function getManga(offset = 0, limit = 20): Promise<MangaDexResponse> {
     params: {
       availableTranslatedLanguage: ['en'],
       includes: ['cover_art'],
+            contentRating: ['safe'],
       limit,
       offset,
     },
@@ -33,6 +34,7 @@ async function getSearchManga(
       title: search,
       limit,
       offset,
+                  contentRating: ['safe'],
       'order[updatedAt]': 'desc',
       includes: ['cover_art'],
     },
