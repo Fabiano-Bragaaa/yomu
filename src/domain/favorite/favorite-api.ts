@@ -11,24 +11,20 @@ async function getFavorites({
   limit?: number;
   token: string;
 }): Promise<FavoriteMangaResponse> {
-    const { data } = await api.get<FavoriteMangaResponse>(
-      '/user/follows/manga',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          includes: ['cover_art'],
-          limit,
-          offset,
-        },
-        paramsSerializer: {
-          indexes: false,
-        },
-      }
-    );
-    return data;
- 
+  const { data } = await api.get<FavoriteMangaResponse>('/user/follows/manga', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      includes: ['cover_art'],
+      limit,
+      offset,
+    },
+    paramsSerializer: {
+      indexes: false,
+    },
+  });
+  return data;
 }
 
 export const favoriteApi = {
