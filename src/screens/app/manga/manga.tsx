@@ -13,6 +13,7 @@ import { MangaHeader } from './components/manga-header';
 
 export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
   const { id } = route.params;
+  console.log(id);
 
   const { data } = useGetMangaById(id);
 
@@ -36,7 +37,7 @@ export function MangaScreen({ navigation, route }: AppScreenProps<'Manga'>) {
         getList={(offset) => mangaService.getChaptersByMangaId(id, offset)}
         renderItem={renderItem}
         flatListProps={{
-          ListHeaderComponent: <MangaHeader manga={data} />,
+          ListHeaderComponent: <MangaHeader manga={data} mangaId={id} />,
           contentContainerStyle: {
             padding: 16,
             gap: 16,

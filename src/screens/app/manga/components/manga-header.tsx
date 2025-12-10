@@ -1,18 +1,28 @@
 import { MangaDetailsImageSkeleton, Text } from '@components';
-import { type MangaSimple, useFavoriteManga } from '@domain';
+import { type MangaSimple, useToggleFavoriteManga } from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@services';
 import React, { useState } from 'react';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 
 type MangaHeaderProps = {
   manga?: MangaSimple;
+  mangaId: string;
 };
 
-export function MangaHeader({ manga }: MangaHeaderProps) {
+export function MangaHeader({ manga, mangaId }: MangaHeaderProps) {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
-  const { toggleFavorite, isFavorite } = useFavoriteManga();
+  const user = useAuth();
+  const { toggleFavorite, isFavorite } = useToggleFavoriteManga();
+
+  function followManga() {
+    if (user) {
+      console.log(user);
+      toggleFavorite(mangaId, user.access_token);
+    }
+  }
 
   return (
     <View className="gap-6">
@@ -32,7 +42,7 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
             onError={() => setLoading(false)}
           >
             <TouchableOpacity
-              onPress={toggleFavorite}
+              onPress={followManga}
               className="m-4 items-center justify-center self-end rounded-full bg-white p-4"
             >
               <Feather
