@@ -8,6 +8,8 @@ async function getFavorites(
   offset = 0
 ): Promise<PaginatedResponse<FavoriteMangaSimple>> {
   const response = await favoriteApi.getFavorites(offset);
+  console.log('response ===>', response);
+  
   return {
     data: mangaAdapter.toMangaSimpleList(response),
     limit: response.limit,

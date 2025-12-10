@@ -1,5 +1,6 @@
 export const queryKeys = {
   manga: ['manga'],
+  favorite: ['favorite'],
   mangaById: (id: string) => ['manga', id],
   chaptersByMangaId: (mangaId: string) => ['chapters', mangaId],
   chapterPages: (chapterId: string) => ['chapter', chapterId],
