@@ -26,8 +26,13 @@ async function unfollowManga(mangaId: string, token: string): Promise<void> {
   await favoriteApi.unfollowManga(mangaId, token);
 }
 
+async function checkMangaFavoriteStatus(mangaId: string, token: string): Promise<boolean> {
+  return await favoriteApi.checkMangaFavoriteStatus(mangaId, token);
+}
+
 export const favoriteService = {
   getFavorites,
   followManga,
   unfollowManga,
+  checkMangaFavoriteStatus,
 };

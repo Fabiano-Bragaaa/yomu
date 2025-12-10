@@ -47,8 +47,19 @@ async function unfollowManga(mangaId: string, token: string): Promise<void> {
   });
 }
 
+async function checkMangaFavoriteStatus(mangaId: string, token: string): Promise<boolean> {
+  const { status } = await api.get<boolean>(`/user/follows/manga/${mangaId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    validateStatus: status => status === 200 || status === 404,
+  });
+  return status === 200 ? true : false;
+}
+
 export const favoriteApi = {
   getFavorites,
   followManga,
   unfollowManga,
+  checkMangaFavoriteStatus,
 };
