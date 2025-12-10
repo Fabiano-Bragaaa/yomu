@@ -1,5 +1,9 @@
 import { MangaDetailsImageSkeleton, Text } from '@components';
-import { type MangaSimple, useToggleFavoriteManga } from '@domain';
+import {
+  type MangaSimple,
+  useCheckFavoriteManga,
+  useToggleFavoriteManga,
+} from '@domain';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '@services';
@@ -14,7 +18,12 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const user = useAuth();
-  const { toggleFavorite, isFavorite } = useToggleFavoriteManga();
+  const { isFavorite } = useCheckFavoriteManga({
+    mangaId: manga?.id,
+    token: user?.access_token,
+  });
+
+  const { toggleFavorite } = useToggleFavoriteManga();
 
   function followManga() {
     if (user && manga?.id) {
