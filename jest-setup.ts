@@ -15,3 +15,18 @@ if (typeof globalThis.structuredClone === 'undefined') {
 global.__ExpoImportMetaRegistry = {
   get: () => undefined,
 };
+
+const originalError = console.error;
+beforeAll(() => {
+  console.error = (...args: unknown[]) => {
+    const message = args.join(' ');
+    if (typeof message === 'string' && message.includes('not wrapped in act')) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});
