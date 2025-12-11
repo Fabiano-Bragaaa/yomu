@@ -12,7 +12,6 @@ jest.mock('../../favorite-service', () => ({
 }));
 
 describe('useToggleFavoriteManga()', () => {
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -44,7 +43,10 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(false);
 
     await act(async () => {
-      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
+      result.current.toggleFavorite(
+        mockedData.mockMangaId,
+        mockedData.mockToken
+      );
     });
 
     await waitFor(() => {
@@ -66,7 +68,10 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(true);
 
     await act(async () => {
-      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
+      result.current.toggleFavorite(
+        mockedData.mockMangaId,
+        mockedData.mockToken
+      );
     });
 
     await waitFor(() => {
@@ -86,7 +91,10 @@ describe('useToggleFavoriteManga()', () => {
     const { result } = renderHook(() => useToggleFavoriteManga(false));
 
     await act(async () => {
-      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
+      result.current.toggleFavorite(
+        mockedData.mockMangaId,
+        mockedData.mockToken
+      );
     });
 
     await waitFor(() => {
@@ -103,7 +111,10 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(false);
 
     await act(async () => {
-      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
+      result.current.toggleFavorite(
+        mockedData.mockMangaId,
+        mockedData.mockToken
+      );
     });
 
     await waitFor(() => {
@@ -121,7 +132,10 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(true);
 
     await act(async () => {
-      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
+      result.current.toggleFavorite(
+        mockedData.mockMangaId,
+        mockedData.mockToken
+      );
     });
 
     await waitFor(() => {
