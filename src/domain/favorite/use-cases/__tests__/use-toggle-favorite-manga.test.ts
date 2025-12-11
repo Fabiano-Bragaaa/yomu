@@ -2,6 +2,7 @@ import { act, renderHook, waitFor } from 'test-utils';
 
 import { favoriteService } from '../../favorite-service';
 import { useToggleFavoriteManga } from '../use-toggle-favorite-manga';
+import { mockedData } from './mocked-data/mocked-data';
 
 jest.mock('../../favorite-service', () => ({
   favoriteService: {
@@ -11,8 +12,6 @@ jest.mock('../../favorite-service', () => ({
 }));
 
 describe('useToggleFavoriteManga()', () => {
-  const mockMangaId = 'manga-123';
-  const mockToken = 'token-456';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -45,7 +44,7 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(false);
 
     await act(async () => {
-      result.current.toggleFavorite(mockMangaId, mockToken);
+      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
     });
 
     await waitFor(() => {
@@ -54,8 +53,8 @@ describe('useToggleFavoriteManga()', () => {
     });
 
     expect(favoriteService.followManga).toHaveBeenCalledWith(
-      mockMangaId,
-      mockToken
+      mockedData.mockMangaId,
+      mockedData.mockToken
     );
   });
 
@@ -67,7 +66,7 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(true);
 
     await act(async () => {
-      result.current.toggleFavorite(mockMangaId, mockToken);
+      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
     });
 
     await waitFor(() => {
@@ -76,8 +75,8 @@ describe('useToggleFavoriteManga()', () => {
     });
 
     expect(favoriteService.unfollowManga).toHaveBeenCalledWith(
-      mockMangaId,
-      mockToken
+      mockedData.mockMangaId,
+      mockedData.mockToken
     );
   });
 
@@ -87,7 +86,7 @@ describe('useToggleFavoriteManga()', () => {
     const { result } = renderHook(() => useToggleFavoriteManga(false));
 
     await act(async () => {
-      result.current.toggleFavorite(mockMangaId, mockToken);
+      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
     });
 
     await waitFor(() => {
@@ -104,7 +103,7 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(false);
 
     await act(async () => {
-      result.current.toggleFavorite(mockMangaId, mockToken);
+      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
     });
 
     await waitFor(() => {
@@ -122,7 +121,7 @@ describe('useToggleFavoriteManga()', () => {
     expect(result.current.isFavorite).toBe(true);
 
     await act(async () => {
-      result.current.toggleFavorite(mockMangaId, mockToken);
+      result.current.toggleFavorite(mockedData.mockMangaId, mockedData.mockToken);
     });
 
     await waitFor(() => {
