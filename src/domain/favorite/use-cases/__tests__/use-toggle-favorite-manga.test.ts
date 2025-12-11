@@ -7,8 +7,6 @@ jest.mock('../../favorite-service', () => ({
   favoriteService: {
     followManga: jest.fn(),
     unfollowManga: jest.fn(),
-    getFavorites: jest.fn(),
-    checkMangaFavoriteStatus: jest.fn(),
   },
 }));
 
