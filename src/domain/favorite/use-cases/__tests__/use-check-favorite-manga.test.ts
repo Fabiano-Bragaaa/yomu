@@ -38,7 +38,9 @@ describe('useCheckFavoriteManga()', () => {
     );
   });
   it('should return error on check favorite manga status', async () => {
-    jest.spyOn(favoriteService, 'checkMangaFavoriteStatus').mockRejectedValue(new Error('Failed to check favorite manga status'));
+    jest
+      .spyOn(favoriteService, 'checkMangaFavoriteStatus')
+      .mockRejectedValue(new Error('Failed to check favorite manga status'));
     const { result } = renderHook(() =>
       useCheckFavoriteManga({
         mangaId: mockedData.mockMangaId,
