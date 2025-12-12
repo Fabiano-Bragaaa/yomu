@@ -10,7 +10,7 @@ module.exports = {
   ],
   moduleFileExtensions: ['js', 'ts', 'tsx'],
   transformIgnorePatterns: [
-    `node_modules/(?!(?:.pnpm/)?((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|@sentry/.*|native-base|react-native-svg|@dev-plugins/.*))`,
+    `node_modules/(?!(?:.pnpm/)?((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|@sentry/.*|native-base|react-native-svg|@dev-plugins/.*|msw|until-async))`,
   ],
   coverageReporters: [
     'json-summary',
@@ -38,5 +38,8 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage/',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  testEnvironmentOptions: {
+    customExportConditions: [''],
   },
 };

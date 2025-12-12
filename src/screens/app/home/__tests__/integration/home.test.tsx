@@ -1,9 +1,18 @@
-import { renderScreen } from 'test-utils';
+import { renderScreen, screen } from 'test-utils';
 
 import { HomeScreen } from '../../home';
+import { server } from '@test';
 
 describe('integration: Home', () => {
-  it('should render correctly', () => {
+
+  beforeAll(() => server.listen());
+  afterEach(() => server.restoreHandlers())
+  afterAll(() => server.close());
+
+  it('should render correctly', async () => {
     renderScreen(<HomeScreen navigation={{} as any} route={{} as any} />);
+
+    const title = await screen.findByText(/My Robot Has Been Acting Strange Lately/i);
+    expect(title).toBeTruthy();
   });
 });
