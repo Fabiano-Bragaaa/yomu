@@ -10,7 +10,7 @@ function getBaseUrl(): { url: string } {
   return { url };
 }
 
-const { url } = getBaseUrl();
+export const { url } = getBaseUrl();
 
 export const api = axios.create({
   baseURL: url,

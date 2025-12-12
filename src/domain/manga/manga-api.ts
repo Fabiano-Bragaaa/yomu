@@ -8,8 +8,10 @@ import {
   type MangaDexSingleResponse,
 } from './manga-type';
 
+export const MANGA_URL = '/manga';
+
 async function getManga(offset = 0, limit = 20): Promise<MangaDexResponse> {
-  const { data } = await api.get<MangaDexResponse>('/manga', {
+  const { data } = await api.get<MangaDexResponse>(MANGA_URL, {
     params: {
       availableTranslatedLanguage: ['en'],
       includes: ['cover_art'],
@@ -29,7 +31,7 @@ async function getSearchManga(
   offset = 0,
   limit = 20
 ): Promise<MangaDexResponse> {
-  const { data } = await api.get<MangaDexResponse>('/manga', {
+  const { data } = await api.get<MangaDexResponse>(MANGA_URL, {
     params: {
       title: search,
       limit,
@@ -47,7 +49,7 @@ async function getSearchManga(
 }
 
 async function getMangaById(id: string): Promise<MangaDexManga> {
-  const { data } = await api.get<MangaDexSingleResponse>(`/manga/${id}`, {
+  const { data } = await api.get<MangaDexSingleResponse>(`${MANGA_URL}/${id}`, {
     params: {
       includes: ['cover_art'],
     },
@@ -64,7 +66,7 @@ async function getChaptersByMangaId(
   offset = 0
 ): Promise<MangaDexChapterResponse> {
   const { data } = await api.get<MangaDexChapterResponse>(
-    `/manga/${mangaId}/feed`,
+    `${MANGA_URL}/${mangaId}/feed`,
     {
       params: {
         limit,
