@@ -28,7 +28,6 @@ export function MangaHeader({ manga }: MangaHeaderProps) {
 
   function followManga() {
     if (user && manga?.id) {
-      console.log(manga.id);
       toggleFavorite(manga.id, user.access_token);
     }
   }
