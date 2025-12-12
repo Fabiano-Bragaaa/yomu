@@ -1,4 +1,3 @@
-// Import server directly to avoid loading api-client.mock
 import { renderScreen, screen } from 'test-utils';
 
 import { server } from '../../../../../test/server/server';
