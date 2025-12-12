@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   render,
@@ -34,6 +35,24 @@ function customRenderHook<Result, Props>(
   });
 }
 
+export const wrapperScreenProviders = () => {
+  const queryClient = new QueryClient(queryClientOptions);
+
+  return ({ children }: { children: ReactNode }) => (
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer> {children} </NavigationContainer>
+    </QueryClientProvider>
+  );
+};
+
+function renderScreen<T = unknown>(
+  component: ReactElement<T>,
+  options?: Omit<RenderOptions, 'wrapper'>
+) {
+  return render(component, { wrapper: wrapperScreenProviders(), ...options });
+}
+
 export * from '@testing-library/react-native';
 export { renderComponent as render };
 export { customRenderHook as renderHook };
+export { renderScreen };
