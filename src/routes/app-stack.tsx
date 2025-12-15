@@ -13,10 +13,15 @@ export type AppStackParamList = {
 export const { Navigator, Screen } =
   createNativeStackNavigator<AppStackParamList>();
 
-export function AppStack() {
+interface AppStackProps {
+  initialRouteName?: keyof AppStackParamList;
+}
+
+export function AppStack({ initialRouteName }: AppStackProps) {
   return (
     <Navigator
       screenOptions={{ headerShown: false, fullScreenGestureEnabled: true }}
+      initialRouteName={initialRouteName}
     >
       <Screen name="AppTab" component={AppTabNavigation} />
       <Screen name="Manga" component={MangaScreen} />

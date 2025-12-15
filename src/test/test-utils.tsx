@@ -47,9 +47,42 @@ export const wrapperScreenProviders = () => {
 
 function renderScreen<T = unknown>(
   component: ReactElement<T>,
-  options?: Omit<RenderOptions, 'wrapper'>
+  {
+    routeName,
+    params,
+    ...options
+  }: Omit<RenderOptions, 'wrapper'> & {
+    routeName?: string;
+    params?: object;
+  } = {}
 ) {
-  return render(component, { wrapper: wrapperScreenProviders(), ...options });
+  return render(component, {
+    wrapper: ({ children }) => {
+      const queryClient = new QueryClient(queryClientOptions);
+
+      return (
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer
+            initialState={
+              routeName
+                ? {
+                    routes: [
+                      {
+                        name: routeName,
+                        params,
+                      },
+                    ],
+                  }
+                : undefined
+            }
+          >
+            {children}
+          </NavigationContainer>
+        </QueryClientProvider>
+      );
+    },
+    ...options,
+  });
 }
 
 export * from '@testing-library/react-native';
