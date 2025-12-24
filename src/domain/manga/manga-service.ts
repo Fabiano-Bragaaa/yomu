@@ -28,6 +28,7 @@ async function getChaptersByMangaId(
   offset = 0
 ): Promise<PaginatedResponse<MangaChapterSimple>> {
   const response = await mangaApi.getChaptersByMangaId(mangaId, 20, offset);
+
   return {
     data: mangaAdapter.toChapterSimpleList(response.data),
     limit: response.limit,
