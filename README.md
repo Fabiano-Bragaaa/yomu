@@ -23,6 +23,8 @@ https://docs.expo.dev/get-started/installation/
 
 Create a file called `.env` in the root of the project with the following variables:
 
+```
+
 EXPO_PUBLIC_BASE_URL=https://api.mangadex.org
 EXPO_PUBLIC_AUTH_URL=https://auth.mangadex.org/realms/mangadex/protocol/openid-connect/token
 EXPO_PUBLIC_IMAGE_URL=https://uploads.mangadex.org/
@@ -32,16 +34,15 @@ EXPO_PUBLIC_USERNAME=your_username
 EXPO_PUBLIC_PASSWORD=your_password
 EXPO_PUBLIC_CLIENT_ID=your_client_id
 EXPO_PUBLIC_CLIENT_SECRET=your_client_secret
+```
 
-csharp
-Copy code
 
 There is an example file available at:
 
 .env.example
 
 yaml
-Copy code
+
 
 ---
 
@@ -51,45 +52,35 @@ Copy code
 
 This project uses **pnpm**:
 
+```
 pnpm install
+```
 
-markdown
-Copy code
 
 **Run the app**
 
+```
 pnpm start
+```
 
-csharp
-Copy code
 
 **Run on iOS**
 
+```
 pnpm ios
-
-csharp
-Copy code
+```
 
 **Run on Android**
 
+```
 pnpm android
-
-csharp
-Copy code
-
-**Run on Web**
-
-pnpm web
-
-markdown
-Copy code
+```
 
 **Run Tests**
 
+```
 pnpm test
-
-markdown
-Copy code
+```
 
 ---
 
@@ -109,13 +100,6 @@ Copy code
 ---
 
 ### App Screenshots
-
-| Screen         | Preview |
-|---------------|---------|
-| Home          | <img src="docs/images/home.png" width="200"> |
-| Search        | <img src="docs/images/search.png" width="200"> |
-| Manga Details | <img src="docs/images/manga-details.png" width="200"> |
-| Manga List    | <img src="docs/images/manga.png" width="200"> |
-| Favorites     | <img src="docs/images/favorite.png" width="200"> |
-
----
+| Home | Search | Manga List | Manga Details | Favorites |
+| :--: | :----: | :--------: | :-----------: | :-------: |
+| <img src="docs/images/home.png" width="200" /> | <img src="docs/images/search.png" width="200" /> | <img src="docs/images/manga-details.png" width="200" />| <img src="docs/images/manga.png" width="200" /> | <img src="docs/images/favorite.png" width="200" /> |
