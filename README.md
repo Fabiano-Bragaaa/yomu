@@ -41,8 +41,6 @@ There is an example file available at:
 
 .env.example
 
-yaml
-
 
 ---
 
